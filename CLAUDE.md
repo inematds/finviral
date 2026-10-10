@@ -20,3 +20,4 @@ When I correct you, or you catch yourself making a mistake: before continuing, a
 - HeyGen passou a exigir "voice engine" na voz INEMA TIME (09/10, ~21h): o "Gerar" não abria o modal e o script dizia só "sem Enviar". O heygen-studio.mjs agora mostra o texto do aviso no erro; o Nei ajusta a voz no estúdio. (09/10/2026)
 - Citação no quadro e no base.md = literal do transcript ("se, por exemplo, Lula ganhar", não "Se o Lula ganhar"); o `auto/checar.py` reprova paráfrase. (09/10/2026)
 - Não editar `auto/rodar.sh` (ou qualquer .sh) enquanto uma rodada está em execução: o bash lê o script por offset e executa pedaço deslocado. Editar uma cópia e trocar com `mv` (novo inode) ou esperar acabar. (09/10/2026)
+- A voz do HeyGen chega ~-26 dB (7 dB abaixo da chatterbox): mixar SEMPRE com loudnorm -14 LUFS e medir (`ebur128`) antes de enviar. O semanal 09/10 saiu baixo e o Nei notou. (09/10/2026)
