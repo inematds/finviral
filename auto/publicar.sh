@@ -6,6 +6,7 @@
 # Autorizado pelo Nei em 10/10/2026: "pode sempre criar direto com o avatar … publicar … e sempre manda para o bot também".
 set -uo pipefail
 V="$1"; E="$(cd "$2" && pwd)"; ROT="$3"; EXTRA="${4:-}"
+PL="$E/publicar-$(printf %s "$ROT" | tr -c 'A-Za-z0-9-' _).log"  # o rótulo traz a data dd/mm/aaaa: barra no nome quebrava o log (10/10/2026)
 BOT="$HOME/projetos/refazvideo/ferramentas/enviar_bot_v3.mjs"
 DRY=""; [ "${SEM_BOT:-}" = 1 ] && DRY=--dry-run
 DUR=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$V" | cut -d. -f1)
@@ -16,12 +17,12 @@ URL=""
 if [ "${SEM_YT:-}" != 1 ]; then
   CTX="finviral (INEMA TIA): resumo do que os maiores influenciadores de finanças do Brasil (ranking Anbima FInfluence) disseram, com a fonte de cada número na tela e o Nei Maldaner comentando. Não é recomendação de investimento. Curso gratuito de gestão de agentes de IA em https://inema.club. Não cite outros canais na descrição além dos influenciadores do vídeo."
   timeout 2400 "$HOME/projetos/yt-pubx/yt-pubx" publicar "$V" --canal lives2 --title "$TIT" --contexto "$CTX" \
-      --contexto-arquivo "$E/legenda.txt" > "$E/publicar-$ROT.log" 2>&1
-  URL=$(grep -o 'https://www.youtube.com/watch?v=[A-Za-z0-9_-]*\|https://youtu.be/[A-Za-z0-9_-]*' "$E/publicar-$ROT.log" | tail -1)
+      --contexto-arquivo "$E/legenda.txt" > "$PL" 2>&1
+  URL=$(grep -o 'https://www.youtube.com/watch?v=[A-Za-z0-9_-]*\|https://youtu.be/[A-Za-z0-9_-]*' "$PL" | tail -1)
 fi
 if [ -n "$URL" ]; then ST="publicado no INEMA TIA (lives2): $URL"
 elif [ "${SEM_YT:-}" = 1 ]; then ST="(sem YouTube nesta rodada)"
-else ST="⚠ NÃO publicou no lives2: $(grep -h -i 'erro\|error\|quota\|limit' "$E/publicar-$ROT.log" | tail -1 | cut -c1-200)"; fi
+else ST="⚠ NÃO publicou no lives2: $(grep -h -i 'erro\|error\|quota\|limit' "$PL" | tail -1 | cut -c1-200)"; fi
 VB="$V"  # bot aceita até ~49 MB: acima disso vai uma cópia 720p (o YouTube recebe o original)
 if [ "$(stat -c %s "$V")" -gt 48000000 ]; then
   VB="${V%.mp4}-720p.mp4"
