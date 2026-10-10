@@ -8,3 +8,4 @@
 - 10/10 portal atualizado (portal 958ba02, inemabuscas e88792a, PRO d7182db); guia/READMEs PT/EN/ES (717d299).
 - 10/10 posts Telegram: INEMA.VIDEOS https://t.me/c/2307181433/4693 (técnico), INEMA.VIBE https://t.me/c/3650752323/3371 (qualquer nicho).
 - Teste SEM_AVATAR SEM_BOT do domingo (edicoes/2026-10-10-domingo) rodando para validar o rodar.sh novo antes de dom 02:00.
+- 10/10 manhã: saudeviral (irmão, lives12, 05:00) criado e no portal. Do semanal dele vieram correções do motor que valem aqui: palco com miniatura inteira sobre fundo desfocado + título do hero que cabe (85eb03a), e fila no perfil do HeyGen dentro do explicavideos 2.7.8 (heygen-perfil.mjs; o download solta o perfil entre conferências; engine/heygen-fila.sh mostra quem usa).

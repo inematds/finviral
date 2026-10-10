@@ -6,3 +6,4 @@
 - PRÓXIMO: checar --longo → narrar.py (chatterbox) → gerar_cena_longo → compor_longo --narracao → folha de quadros →
   bot v3 com o roteiro → esperar "pode fazer" para HeyGen → ligar no rodar.sh (sáb/dom, não-fatal, depois do curto).
 - PENDENTE de decisão do Nei: publicar direto no lives2 ou seguir ele publicando; 9:16 diário no modelo novo.
+- 10/10 ~07:00: longo e curto ligados e publicando (lives2 + bot). Motor compartilhado com o saudeviral: correção de palco/avatar vale para os dois. HeyGen agora tem fila (explicavideos 2.7.8). Aberto: o Nei decidir se o finviral também passa a narrar por "você".
