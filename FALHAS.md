@@ -1,5 +1,6 @@
 | data | o que quebrou | menor correção | prompt \| infra |
 |---|---|---|---|
+| 2026-10-10 | voz baixava no fim ("no inema.club"): afade de 1,4 s na mistura toda e o HeyGen corta logo após a última palavra | fade só na música | prompt |
 | 2026-10-10 | legenda cortada na borda (bloco fixo de 3 palavras: "INTELIGÊNCIA ARTIFICIAL CURSO") + "-feira" solto + "Ambima" do Whisper | bloco ≤18 letras, fonte encolhe até caber, cola "-feira", grafia do roteiro na legenda | prompt |
 | 2026-10-09 | semanal com avatar saiu com voz baixa (HeyGen entrega a −26 dB, mix sem normalizar) | loudnorm −14 LUFS no compor_avatar.sh | infra |
 | 2026-10-09 | base.md do piloto com citação parafraseada ("Se o Lula ganhar") | auto/checar.py confere trecho literal no transcript | prompt |
