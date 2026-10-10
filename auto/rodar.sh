@@ -3,9 +3,10 @@
 # uso: auto/rodar.sh <diario|semanal|domingo> [AAAA-MM-DD da rodada, padrão hoje]
 #   diario  = vídeos de ontem e anteontem ainda não usados (40–60 s)
 #   semanal = balanço da semana (7 dias até ontem), 90 s a 2 min   [sábado]
-# Teste: SEM_AVATAR=1 pula o HeyGen; SEM_BOT=1 só simula o envio.
+# Teste: SEM_AVATAR=1 pula o HeyGen; SEM_BOT=1 só simula o envio (e não publica); SEM_LONGO=1 pula o longo.
+# Publica no YouTube INEMA TIA (lives2) e manda sempre ao bot v3 (auto/publicar.sh). Sáb/dom: + LONGO 16:9 (auto/longo.sh).
 #   domingo = a semana que passou + o que eles esperam para a próxima, ~90 s   [domingo]
-# Sempre manda algo ao bot v3: o vídeo, "sem pauta" ou "falhou em X". O Nei aprova e publica.
+# Sempre manda algo ao bot v3: o vídeo (com o link do lives2), "sem pauta" ou "falhou em X".
 set -uo pipefail
 RAIZ="$(cd "$(dirname "$0")/.." && pwd)"
 MODO="${1:?modo: diario|semanal|domingo}"; DIA="${2:-$(date +%F)}"
@@ -28,13 +29,17 @@ $1" || echo "falhou o envio do aviso"
   echo "AVISO: $1"; exit "${2:-1}"
 }
 
+AVISO_LONGO="Na ÚLTIMA fala (CTA), antes do convite do curso, diga: 'A explicação completa de cada um está no vídeo longo do canal INEMA TIA.'"
+INSTR_L=""
 case "$MODO" in
   diario)  DE=$(d -2); ATE=$(d -1); MAXV=6
     INSTR="DIÁRIO de $DATA_BR: o que eles publicaram ontem e anteontem. Vídeo de 40 a 60 s, de 5 a 7 falas, de 110 a 150 palavras no total. UMA história principal (o número ou a polêmica mais forte) e no máximo mais um ou dois números. Se só um influenciador publicou algo forte, o vídeo é sobre ele." ;;
   semanal) DE=$(d -7); ATE=$(d -1); MAXV=12
-    INSTR="SEMANAL (sábado, $DATA_BR): balanço da semana de $(date -d "$DIA -7 day" +%d/%m) a $(date -d "$DIA -1 day" +%d/%m). Vídeo de 90 s a 2 min, de 9 a 12 falas, de 230 a 300 palavras. Placar da semana: o maior número, quem acertou ou errou, a polêmica, um número de cada influenciador relevante." ;;
+    INSTR="SEMANAL (sábado, $DATA_BR): balanço da semana de $(date -d "$DIA -7 day" +%d/%m) a $(date -d "$DIA -1 day" +%d/%m). Vídeo de 90 s a 2 min, de 9 a 12 falas, de 230 a 300 palavras. Placar da semana: o maior número, quem acertou ou errou, a polêmica, um número de cada influenciador relevante. $AVISO_LONGO"
+    INSTR_L="SEMANAL (sábado, $DATA_BR): a semana de $(date -d "$DIA -7 day" +%d/%m) a $(date -d "$DIA -1 day" +%d/%m) explicada. Vídeo de 5,5 a 7 min. Um capítulo por influenciador com assunto forte; mostre divergências entre eles." ;;
   domingo) DE=$(d -7); ATE=$(d -1); MAXV=12
-    INSTR="DOMINGO ($DATA_BR): o que esperar da semana que vem, segundo eles. Vídeo de uns 90 s, de 8 a 10 falas, de 190 a 240 palavras. Comece pelo número mais forte da semana que passou e foque nas apostas, nas datas e nos riscos que ELES apontaram para os próximos dias, sempre atribuídos." ;;
+    INSTR="DOMINGO ($DATA_BR): o que esperar da semana que vem, segundo eles. Vídeo de uns 90 s, de 8 a 10 falas, de 190 a 240 palavras. Comece pelo número mais forte da semana que passou e foque nas apostas, nas datas e nos riscos que ELES apontaram para os próximos dias, sempre atribuídos. $AVISO_LONGO"
+    INSTR_L="DOMINGO ($DATA_BR): o que esperar da semana que vem, explicado. Vídeo de 5,5 a 7 min. Um capítulo por influenciador: a aposta ou o risco que ELE apontou para os próximos dias, o raciocínio dele e os números; datas e eventos citados viram timeline; divergências entre eles com compare." ;;
   *) echo "modo inválido"; exit 2 ;;
 esac
 
@@ -109,11 +114,49 @@ else
     && bash "$RAIZ/motor/montar.sh" "$ED" "$ED/video.mp4" || avisar "falhou também a versão com foto (ver $LOG)"
 fi
 
-# 5. envio ao bot v3 (o Nei aprova e publica)
-DUR=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$ED/video.mp4" | cut -d. -f1)
+# 5. publica no YouTube INEMA TIA (lives2) e manda SEMPRE ao bot v3 (autorizado pelo Nei em 10/10/2026)
+#    a versão com foto (avatar falhou) e os testes só vão ao bot
 SUG=""; [ -s "$ED/sugestao.txt" ] && SUG="
 Sugestão de influenciador: $(head -c 300 "$ED/sugestao.txt")"
-node "$BOT" $DRY "$ED/video.mp4" "finviral · $MODO · $DATA_BR · ${DUR}s $NOTA
-$(head -c 700 "$ED/legenda.txt")$SUG" || avisar "vídeo pronto em $ED/video.mp4 mas o envio ao bot falhou"
+SEMYT=""; { [ -n "$NOTA" ] || [ -n "$DRY" ]; } && SEMYT=1
+SEM_YT="$SEMYT" SEM_BOT="${SEM_BOT:-}" bash "$RAIZ/auto/publicar.sh" "$ED/video.mp4" "$ED" "$MODO · $DATA_BR $NOTA" "$SUG"
 [ "$MODO" = diario ] && [ -z "$DRY" ] && cut -f3 "$ED/videos.tsv" >> "$USADOS"
+
+# 6. sábado e domingo: o LONGO 16:9 explicado (não derruba o curto: falha vira aviso no bot)
+if [ -n "$INSTR_L" ] && [ "${SEM_LONGO:-}" != 1 ]; then
+  EL="$RAIZ/edicoes/$DIA-$MODO-longo"; mkdir -p "$EL/img"
+  cp "$ED/videos.tsv" "$ED/transcritos.txt" "$EL/"; cp "$ED"/img/*.jpg "$EL/img/"
+  PL=$(python3 - "$RAIZ/auto/roteiro-longo.md" "$EL" "$TX" "$RAIZ" "$MODO" "$DATA_BR" "$INSTR_L" "$ED" <<'PY'
+import sys
+t = open(sys.argv[1]).read()
+for k, v in {"{ED}": sys.argv[2], "{TX}": sys.argv[3], "{RAIZ}": sys.argv[4], "{MODO}": sys.argv[5], "{DATA}": sys.argv[6],
+             "{DATA_BR}": sys.argv[6], "{INSTRUCAO_MODO}": sys.argv[7], "{CURTO}": sys.argv[8]}.items():
+    t = t.replace(k, v)
+print(t)
+PY
+)
+  longo_roteiro() {
+    ( cd "$EL" && timeout 2400 env -u ANTHROPIC_API_KEY claude -p "$1" --allowedTools "Read,Write,Edit,Glob,Grep" \
+        --add-dir "$RAIZ" --add-dir "$TX" --add-dir "$HOME/projetos/explicavideos/engine/v2" --permission-mode acceptEdits > "$EL/claude.log" 2>&1 )
+  }
+  aviso_longo() { echo "$1" > "$EL/aviso.txt"; rm -f "$EL/aviso.txt.envio-v3.json"; node "$BOT" $DRY "$EL/aviso.txt" "finviral · $MODO · LONGO · $DATA_BR
+$1" || true; echo "AVISO LONGO: $1"; }
+  rm -f "$EL/SEM_PAUTA.txt" "$EL/roteiro.json" "$EL/base.md"
+  if ! longo_roteiro "$PL"; then aviso_longo "o claude -p falhou no roteiro longo"
+  elif [ -f "$EL/SEM_PAUTA.txt" ]; then aviso_longo "longo sem pauta: $(cat "$EL/SEM_PAUTA.txt")"
+  else
+    if ! python3 "$RAIZ/auto/checar.py" "$EL" "$TX" --longo > "$EL/checar.log"; then
+      longo_roteiro "$PL
+
+## CORREÇÃO
+A conferência automática reprovou os arquivos que você gravou. Corrija só o que está abaixo, reescrevendo base.md e roteiro.json. Trecho é cópia literal do transcript; número na fala vai por extenso; deixa é trecho literal da fala, sem número.
+$(cat "$EL/checar.log")" || true
+      python3 "$RAIZ/auto/checar.py" "$EL" "$TX" --longo > "$EL/checar.log"
+    fi
+    if grep -qx ok "$EL/checar.log"; then
+      if [ "${SEM_AVATAR:-}" = 1 ]; then echo "longo: roteiro ok (teste sem avatar, não renderiza)"
+      else bash "$RAIZ/auto/longo.sh" "$EL" "$MODO · LONGO · $DATA_BR" > "$EL/longo.log" 2>&1 || aviso_longo "longo falhou: $(grep -h ERRO "$EL/longo.log" | tail -1)"; fi
+    else aviso_longo "roteiro longo reprovado na conferência: $(grep PROBLEMA "$EL/checar.log" | head -3)"; fi
+  fi
+fi
 echo "=== fim $(date '+%F %T')"
