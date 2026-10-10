@@ -31,7 +31,7 @@ EOF
 # Quem não pega a trava (ex.: lote de tradução do explicavideos) abre o mesmo perfil e o Chrome recusa
 # ("ProcessSingleton", 10/10/2026): espera 2 min e tenta de novo, até 1 h. Nada foi enviado quando isso acontece.
 tenta(){ local log="$1" k; shift
-  for k in $(seq 1 30); do
+  for k in $(seq 1 "${TENTA_HEYGEN:-30}"); do  # TENTA_HEYGEN: nº de tentativas de 2 min
     "$@" > "$log" 2>&1 && return 0
     grep -q ProcessSingleton "$log" || return 1
     echo "perfil do HeyGen aberto por outro processo; nova tentativa em 2 min ($k/30)"; sleep 120

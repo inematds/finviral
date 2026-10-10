@@ -16,7 +16,14 @@ BOT="$HOME/projetos/refazvideo/ferramentas/enviar_bot_v3.mjs"
 DRY=""; [ "${SEM_BOT:-}" = 1 ] && DRY=--dry-run
 ED="$RAIZ/edicoes/$DIA-$MODO"; mkdir -p "$ED/img"
 LOG="$ED/rodada.log"; exec >>"$LOG" 2>&1
-exec 8>"$RAIZ/auto/.rodando"; flock -n 8 || { echo "outra rodada em andamento"; exit 0; }
+# outra rodada segurando a trava: ESPERA (até 4 h) e avisa no bot se não der; antes saía calada e o semanal de 10/10 se perdeu
+exec 8>"$RAIZ/auto/.rodando"
+if ! flock -n 8; then
+  echo "$(date '+%F %T') outra rodada em andamento; esperando até 4 h"
+  flock -w 14400 8 || { echo "outra rodada segurou a trava por 4 h: $MODO $DIA não rodou" > "$ED/aviso.txt"; rm -f "$ED/aviso.txt.envio-v3.json"
+    node "$BOT" $DRY "$ED/aviso.txt" "finviral · $MODO · $DIA
+⚠ não rodou: outra rodada segurou a trava por 4 h" || true; exit 1; }
+fi
 echo "=== $(date '+%F %T') $MODO $DIA"
 grep -qx "$DIA $MODO" "$RAIZ/auto/pular.txt" 2>/dev/null && { echo "pulado (auto/pular.txt)"; exit 0; }
 d() { date -d "$DIA $1 day" +%Y%m%d; }

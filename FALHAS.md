@@ -1,5 +1,6 @@
 | data | o que quebrou | menor correção | prompt \| infra |
 |---|---|---|---|
+| 2026-10-10 | semanal das 02:00 saiu calado ("outra rodada em andamento": teste manual segurava o flock) e nada foi ao lives2 | rodar.sh: `flock -w` (esperar) + avisar no bot em vez de `exit 0` mudo — pendente | infra |
 | 2026-10-10 | (no saudeviral, motor igual) fundo de miniatura cortado, título do hero estourando, HeyGen "ProcessSingleton" com o perfil aberto por outra sessão | palco.html: fundo desfocado + caber() com fonte carregada; avatar_heygen.sh: nova tentativa a cada 2 min até 1 h | infra |
 | 2026-10-10 | piloto longo: frase "O Brasil mudou…" de pé sem risco (statement com strike_at sem ~~) e cabeçalho v2 sobre a capa | gerar_cena_longo risca a frase toda e antecipa o risco; cena da capa com cabeçalho vazio | prompt |
 | 2026-10-10 | voz baixava no fim ("no inema.club"): afade de 1,4 s na mistura toda e o HeyGen corta logo após a última palavra | fade só na música | prompt |
