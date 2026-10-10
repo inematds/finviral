@@ -1,0 +1,2 @@
+# rodadas a pular: "AAAA-MM-DD modo" (uma por linha)
+2026-10-10 semanal

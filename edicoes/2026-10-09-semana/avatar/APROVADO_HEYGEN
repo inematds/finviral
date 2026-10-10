@@ -1,0 +1,5 @@
+Autorização do Nei (09/10/2026, chat): "pode fazer agora com o avatar do nei".
+O que: 1 bloco, avatar do Nei (TEMPLATE-AVATAR16, voz INEMA TIME), fala = avatar/fala.txt (~1,8 min), título FINVIRAL-2026-10-09-semana-b (o 1º rascunho ficou travado).
+Como: estúdio do HeyGen pela assinatura (explicavideos/engine/heygen-studio.mjs), sem API de geração — mesmo caminho do eventosextremospub (Sul e Norte/Nordeste).
+Depois: baixar o MP4, retemporizar a cena pela fala do avatar e compor 9:16 (avatar no canto).
+Atualização 09/10 ~23h50: o HeyGen passou a exigir voice engine na voz INEMA TIME; o Nei atualizou os templates e gerou os rascunhos pendentes. Usado defc6144b47e43389bca9933acfae1b8 (-b); o FINVIRAL-2026-10-09-semana (bf73d297...) é duplicado.

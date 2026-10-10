@@ -1,0 +1,11 @@
+{
+  "_como_editar": "Para incluir ou tirar alguém, edite esta lista (ou peça ao Claude). 'ativo': false pausa sem apagar. Quem entra por sugestão do sistema precisa ser nome consolidado e confiável (ranking Anbima ou equivalente, anos de canal), nunca emergente; a sugestão vem no bot e só entra com o ok do Nei.",
+  "_ranking": "Anbima FInfluence, 10ª edição (2º semestre de 2025)",
+  "canais": [
+    {"handle": "@BrunoPerini", "nome": "Bruno Perini", "rk": "Nº 1 · ANBIMA", "ativo": true},
+    {"handle": "@EconomistaSincero", "nome": "Economista Sincero", "rk": "Nº 2 · ANBIMA", "ativo": true},
+    {"handle": "@ricamorim", "nome": "Ricardo Amorim", "rk": "Nº 3 · ANBIMA", "ativo": true},
+    {"handle": "@primorico", "nome": "O Primo Rico", "rk": "TOP 10 · ANBIMA", "ativo": true},
+    {"handle": "@oseconomistas", "nome": "Os Economistas", "rk": "TOP 10 · ANBIMA", "ativo": true}
+  ]
+}

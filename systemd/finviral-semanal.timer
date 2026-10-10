@@ -1,0 +1,9 @@
+[Unit]
+Description=finviral — semanal às 02:00
+
+[Timer]
+OnCalendar=Sat *-*-* 02:00:00
+Persistent=false
+
+[Install]
+WantedBy=timers.target
