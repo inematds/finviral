@@ -31,6 +31,8 @@ EOF
   flock -w 1800 9 || { echo "ERRO: perfil do HeyGen ocupado há 30 min"; exit 5; }
   cd "$HOME/projetos/explicavideos"
   for i in $(seq 1 "$N"); do
+    # retomada: bloco já enviado (id gravado) não é reenviado — só baixa (REFAZER_HEYGEN=1 força novo envio)
+    if [ -s "$A/video_id-b$i.txt" ] && [ "${REFAZER_HEYGEN:-}" != 1 ]; then echo "bloco $i já enviado: $(cat "$A/video_id-b$i.txt")"; continue; fi
     T="$TITULO"; [ "$N" -gt 1 ] && T="$TITULO-b$i"
     timeout 900 node "$ENG/heygen-studio.mjs" --titulo "$T" --fala-arquivo "$A/fala-b$i.txt" --perfil "$PERFIL" --template TEMPLATE-AVATAR16 > "$A/studio-b$i.log" 2>&1 \
       || { echo "ERRO no estúdio (bloco $i/$N): $(grep -h ERRO "$A/studio-b$i.log" | tail -1)"; exit 3; }
@@ -42,6 +44,7 @@ EOF
   done
   sleep 60
   for i in $(seq 1 "$N"); do
+    [ -s "$A/avatar-b$i.mp4" ] && continue
     timeout 18000 node "$ENG/heygen-estudio-baixar.mjs" --id "$(cat "$A/video_id-b$i.txt")" --saida "$A/avatar-b$i.mp4" --perfil "$PERFIL" --minutos 290 --intervalo 120 > "$A/baixar-b$i.log" 2>&1 \
       || { echo "ERRO ao baixar o bloco $i/$N: $(tail -1 "$A/baixar-b$i.log")"; exit 4; }
   done

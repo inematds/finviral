@@ -16,6 +16,8 @@ When I correct you, or you catch yourself making a mistake: before continuing, a
 
 ## Lessons
 
+- Cadeia longa (HeyGen + render + publicação) disparada à mão vai por `systemd-run --user --unit …` (sobrevive ao terminal; linger ligado), nunca como background da sessão: em 10/10 o piloto rodava preso à sessão e o Nei quis sair. O `avatar_heygen.sh` retoma sem reenviar (reaproveita `video_id-bN.txt`). (10/10/2026)
+
 - Legenda palavra a palavra: bloco por TAMANHO (≤18 letras), não por contagem de palavras, e conferir o maior bloco num frame antes de entregar; palavra da legenda vem do roteiro, o Whisper erra nome próprio ("Ambima"). (10/10/2026)
 
 - No palco.html, função global não pode se chamar `render`: `window.render=` sobrescreve a declaração e entra em recursão infinita (usar `desenhar`). (09/10/2026)
