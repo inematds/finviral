@@ -26,17 +26,18 @@ Full guide (landing + step by step): **https://inematds.github.io/finviral/guia/
 5. **Video:**
    - `motor/palco.html` is rendered frame by frame by Playwright, with counters, a chart, a controversy stamp, word-by-word captions and the source in every scene.
    - The avatar sits in the corner, with a soundtrack.
-6. **Delivery:** the video goes to bot v3 on Telegram. Nei approves and publishes.
+6. **Publishing:** the video is published on YouTube INEMA TIA (lives2) by `yt-pubx` (`auto/publicar.sh`) and always goes to bot v3 on Telegram, with the link. If the avatar fails, the photo version only goes to the bot.
+7. **Saturday and Sunday — the long 16:9:** after the short, "The week explained" (5 to 7 min, one chapter per influencer), with the animated scenes of explicavideo v2 and finance pieces (`motor/longo.html`, `auto/roteiro-longo.md`, `auto/checar.py --longo`, `auto/longo.sh`). The short says at the end that the full explanation is on INEMA TIA.
 
 ## Schedule (systemd, user)
 
 | When | Run | What comes out |
 |---|---|---|
 | Monday to Friday, 02:00 | `diario` | 40–60 s with what they published yesterday and the day before |
-| Saturday, 02:00 | `semanal` | 90 s to 2 min: the week in review |
-| Sunday, 02:00 | `domingo` | ~90 s: what they expect for the coming week |
+| Saturday, 02:00 | `semanal` | 90 s to 2 min: the week in review + long 16:9 "The week explained" (5–7 min) |
+| Sunday, 02:00 | `domingo` | ~90 s: what they expect for the coming week + long 16:9 explained |
 
-Bot v3 always receives one of three things: the video, "no story" (a weak day does not become a video) or "failed at X".
+Bot v3 always receives one of three things: the video (with the lives2 link), "no story" (a weak day does not become a video) or "failed at X".
 
 ```bash
 cp systemd/finviral-* ~/.config/systemd/user/ && systemctl --user daemon-reload

@@ -115,6 +115,7 @@
     <a class="sec" href="#oque">Qué es</a>
     <a class="sec" href="#fluxo">Cómo funciona</a>
     <a class="sec" href="#agenda">Agenda</a>
+    <a class="sec" href="#longo">Video largo</a>
     <a class="sec" href="#guia">Guía de uso</a>
     <a class="sec" href="#exemplos">Ejemplo</a>
     <span class="lang"><a href="../">PT</a><a href="../en/">EN</a><a class="on" href="./">ES</a></span>
@@ -141,7 +142,7 @@
 
 <section id="resumo" class="resumo"><div class="wrap">
   <span class="chip">En resumen</span>
-  <p>finviral es un sistema que hace, solo, videos cortos (9:16) sobre lo que dijeron los mayores influencers de finanzas de Brasil en sus videos. Ve los videos de YouTube mediante transcripción, separa los números, los hechos y las polémicas, y arma un video con números grandes animados, la fuente de cada dato en pantalla y Nei comentando (avatar). Sirve para quien quiere seguir el mercado en un minuto, sin recomendación de inversión. Funciona en una computadora con GPU, con la suscripción de Claude Code y de HeyGen.</p>
+  <p>finviral es un sistema que hace, solo, videos cortos (9:16) sobre lo que dijeron los mayores influencers de finanzas de Brasil en sus videos. Ve los videos de YouTube mediante transcripción, separa los números, los hechos y las polémicas, y arma un video con números grandes animados, la fuente de cada dato en pantalla y Nei comentando (avatar). Sirve para quien quiere seguir el mercado en un minuto, sin recomendación de inversión. Funciona en una computadora con GPU, con la suscripción de Claude Code y de HeyGen. Los sábados y domingos también sale el video largo 16:9 "La semana explicada" (5 a 7 minutos), con un capítulo por influencer. Todo se publica solo en el canal INEMA TIA de YouTube y se envía a Telegram.</p>
 </div></section>
 
 <section id="oque"><div class="wrap">
@@ -167,7 +168,7 @@
     <span>Verificación</span><span class="arr">→</span>
     <span>Avatar</span><span class="arr">→</span>
     <span>Video</span><span class="arr">→</span>
-    <span>Bot v3</span>
+    <span>YouTube + bot</span>
   </div>
   <div class="grid g3" style="margin-top:26px">
     <div class="card"><div class="num">1</div><h3>Recolección y transcripción</h3><p>Lista los videos de los canales de <code>canais.json</code> (solo metadatos, yt-dlp), descarga el audio y transcribe localmente (inemavox, Whisper large-v3).</p></div>
@@ -175,7 +176,7 @@
     <div class="card"><div class="num">3</div><h3>Verificación</h3><p><code>auto/checar.py</code> comprueba que cada fragmento esté en la transcripción, que los números del diálogo estén escritos con palabras, que las imágenes existan, que haya CTA y el aviso "no es recomendación". Si reprueba: vuelve una vez para corrección.</p></div>
     <div class="card"><div class="num">4</div><h3>Avatar</h3><p>HeyGen genera el avatar de Nei por el estudio (suscripción, sin API de generación). <code>motor/retempo.py</code> alinea el arte con el habla. Si HeyGen falla, sale la versión con la foto y la voz de Nei (Chatterbox).</p></div>
     <div class="card"><div class="num">5</div><h3>Video</h3><p><code>motor/palco.html</code> se renderiza cuadro a cuadro con Playwright, con la fuente en cada escena. El avatar queda en la esquina, con música de fondo.</p></div>
-    <div class="card"><div class="num">6</div><h3>Entrega</h3><p>El video va al bot v3 en Telegram. Nei aprueba y publica. El bot siempre recibe algo: el video, "sin pauta" o "falló en X".</p></div>
+    <div class="card"><div class="num">6</div><h3>Publicación</h3><p><code>auto/publicar.sh</code> publica en YouTube INEMA TIA (lives2) con <code>yt-pubx</code> y siempre lo envía al bot v3, con el enlace. Si el avatar falló, la versión con foto solo va al bot.</p></div>
   </div>
 </div></section>
 
@@ -184,8 +185,25 @@
   <h2>Tres rondas por semana, a las 02:00</h2>
   <p class="sub">Timers de systemd de usuario. Un día flojo no se convierte en video: el bot recibe "sin pauta".</p>
   <div class="phase"><div class="tag">Lun a vie</div><div class="d"><strong>Ronda <code>diario</code> · 40–60 s</strong><span>Lo que publicaron ayer y anteayer: una historia principal y como máximo uno o dos números más.</span></div></div>
-  <div class="phase"><div class="tag">Sábado</div><div class="d"><strong>Ronda <code>semanal</code> · 90 s a 2 min</strong><span>Balance de la semana: el mayor número, la polémica y un número de cada influencer relevante.</span></div></div>
-  <div class="phase"><div class="tag">Domingo</div><div class="d"><strong>Ronda <code>domingo</code> · ~90 s</strong><span>Lo que esperan para la próxima semana: apuestas, fechas y riesgos que señalaron, siempre atribuidos.</span></div></div>
+  <div class="phase"><div class="tag">Sábado</div><div class="d"><strong>Ronda <code>semanal</code> · 90 s a 2 min</strong><span>Balance de la semana: el número más grande, la polémica y un número de cada influencer relevante. Después, el largo 16:9 "La semana explicada".</span></div></div>
+  <div class="phase"><div class="tag">Domingo</div><div class="d"><strong>Ronda <code>domingo</code> · ~90 s</strong><span>Lo que esperan para la próxima semana: apuestas, fechas y riesgos que señalaron, siempre atribuidos. Después, el largo 16:9 explicado.</span></div></div>
+</div></section>
+
+<section id="longo"><div class="wrap">
+  <span class="chip">Sábado y domingo</span>
+  <h2>El video largo: la semana explicada</h2>
+  <p class="sub">El corto da el marcador; el largo 16:9 lo explica. De 5 a 7 minutos, un capítulo por influencer: lo que dijo (cita literal), lo que significa, el contexto y los números con fuente. El corto avisa al final que la explicación completa está en INEMA TIA.</p>
+  <div class="grid g2">
+    <figure style="margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line)"><img src="../assets/longo-0.jpg" alt="Portada del video largo: fecha, LA SEMANA EXPLICADA, Ibovespa 206.900 y los cinco rostros" loading="lazy" style="width:100%;display:block"></figure>
+    <figure style="margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line)"><img src="../assets/longo-205.jpg" alt="Escena del capítulo de Ricardo Amorim con el avatar de Nei en la esquina" loading="lazy" style="width:100%;display:block"></figure>
+  </div>
+  <div class="grid g3" style="margin-top:22px">
+    <div class="card"><h3>🎞️ Escenas del explicavideo</h3><p>Comparación, línea de tiempo, frase tachada y corregida, listas y contadores del explicavideo v2, más piezas de finanzas: ficha, número gigante, cita literal, gráfico y sello.</p></div>
+    <div class="card"><h3>🧾 El mismo filtro de hechos</h3><p><code>auto/checar.py --longo</code>: cada hecho con cita literal, números hablados en letras y cada animación atada a una palabra dicha.</p></div>
+    <div class="card"><h3>🧑‍💼 Avatar en bloques</h3><p>El estudio de HeyGen acepta hasta 4.500 caracteres por video: el guion va en bloques y se une en un solo avatar.</p></div>
+  </div>
+<pre><span class="c"># generar el largo de una edición ya aprobada por checar --longo</span>
+<span class="k">auto/longo.sh</span> edicoes/2026-10-10-semanal-longo <span class="s">"semanal · LONGO · 10/10/2026"</span></pre>
 </div></section>
 
 <section id="pre"><div class="wrap">

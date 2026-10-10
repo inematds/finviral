@@ -26,17 +26,18 @@ Guía completa (landing + paso a paso): **https://inematds.github.io/finviral/gu
 5. **Video:**
    - `motor/palco.html` se renderiza cuadro a cuadro con Playwright, con contadores, gráfico, sello de polémica, subtítulos palabra por palabra y la fuente en cada escena.
    - El avatar queda en la esquina, con música de fondo.
-6. **Entrega:** el video va al bot v3 en Telegram. Nei aprueba y publica.
+6. **Publicación:** el video se publica en YouTube INEMA TIA (lives2) con `yt-pubx` (`auto/publicar.sh`) y siempre va al bot v3 en Telegram, con el enlace. Si el avatar falla, la versión con foto solo va al bot.
+7. **Sábado y domingo — el largo 16:9:** después del corto, "La semana explicada" (5 a 7 min, un capítulo por influencer), con las escenas animadas del explicavideo v2 y piezas de finanzas (`motor/longo.html`, `auto/roteiro-longo.md`, `auto/checar.py --longo`, `auto/longo.sh`). El corto avisa al final que la explicación completa está en INEMA TIA.
 
 ## Agenda (systemd, usuario)
 
 | Cuándo | Ronda | Qué sale |
 |---|---|---|
 | Lunes a viernes, 02:00 | `diario` | 40–60 s con lo que publicaron ayer y anteayer |
-| Sábado, 02:00 | `semanal` | 90 s a 2 min: balance de la semana |
-| Domingo, 02:00 | `domingo` | ~90 s: lo que esperan para la próxima semana |
+| Sábado, 02:00 | `semanal` | 90 s a 2 min: balance de la semana + largo 16:9 "La semana explicada" (5–7 min) |
+| Domingo, 02:00 | `domingo` | ~90 s: lo que esperan para la próxima semana + largo 16:9 explicado |
 
-El bot v3 siempre recibe una de tres cosas: el video, "sin pauta" (un día flojo no se convierte en video) o "falló en X".
+El bot v3 siempre recibe una de tres cosas: el video (con el enlace de lives2), "sin pauta" (un día flojo no se convierte en video) o "falló en X".
 
 ```bash
 cp systemd/finviral-* ~/.config/systemd/user/ && systemctl --user daemon-reload
