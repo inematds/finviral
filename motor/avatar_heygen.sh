@@ -20,7 +20,7 @@ python3 -c "import json,sys;print(' '.join(f['fala'] for f in json.load(open(sys
   [ -n "$ID" ] || { echo "ERRO: id do vídeo não achado no studio.log"; exit 3; }
   echo "$ID" > "$A/video_id.txt"
   sleep 60
-  timeout 6000 node "$ENG/heygen-estudio-baixar.mjs" --id "$ID" --saida "$A/avatar.mp4" --perfil "$PERFIL" --minutos 95 --intervalo 120 > "$A/baixar.log" 2>&1 \
+  timeout 9500 node "$ENG/heygen-estudio-baixar.mjs" --id "$ID" --saida "$A/avatar.mp4" --perfil "$PERFIL" --minutos 150 --intervalo 120 > "$A/baixar.log" 2>&1 \
     || { echo "ERRO ao baixar: $(tail -1 "$A/baixar.log")"; exit 4; }
 } 9>"$HOME/.cache/inemaccbot/heygen-estudio.lock"
 python3 "$AQUI/retempo.py" "$E"

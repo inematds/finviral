@@ -103,7 +103,7 @@ if [ "${SEM_AVATAR:-}" != 1 ] && bash "$RAIZ/motor/avatar_heygen.sh" "$ED" "FINV
    && python3 "$RAIZ/motor/gerar_cena.py" "$ED" --avatar && bash "$RAIZ/motor/compor_avatar.sh" "$ED" "$ED/video.mp4"; then
   echo "vídeo com avatar ok"
 else
-  NOTA="(sem avatar: $(grep -h ERRO "$ED/avatar.log" | tail -1 | cut -c1-150); versão com foto)"
+  if [ "${SEM_AVATAR:-}" = 1 ]; then NOTA="(teste sem avatar)"; else NOTA="(sem avatar: $(grep -h ERRO "$ED/avatar.log" 2>/dev/null | tail -1 | cut -c1-150); versão com foto)"; fi
   echo "avatar falhou $NOTA"
   python3 "$RAIZ/motor/narrar.py" "$ED" 1.12 && python3 "$RAIZ/motor/gerar_cena.py" "$ED" --livre \
     && bash "$RAIZ/motor/montar.sh" "$ED" "$ED/video.mp4" || avisar "falhou também a versão com foto (ver $LOG)"
