@@ -14,6 +14,8 @@ When I correct you, or you catch yourself making a mistake: before continuing, a
 
 ## Lessons
 
+- Legenda palavra a palavra: bloco por TAMANHO (≤18 letras), não por contagem de palavras, e conferir o maior bloco num frame antes de entregar; palavra da legenda vem do roteiro, o Whisper erra nome próprio ("Ambima"). (10/10/2026)
+
 - No palco.html, função global não pode se chamar `render`: `window.render=` sobrescreve a declaração e entra em recursão infinita (usar `desenhar`). (09/10/2026)
 - Âncora `"em"` do roteiro casa com a transcrição do Whisper, que escreve números em algarismos ("7 ,7", "750", ".360"): ancorar em algarismo ou em palavra comum. (09/10/2026)
 - O conferidor de voz do cardshorts reprova "dois e meio por cento" (ouve "2,5%"): escrever "dois vírgula cinco". "XP" sai "Xipe": escrever "xis pê". (09/10/2026)

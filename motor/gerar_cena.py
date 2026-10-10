@@ -14,7 +14,7 @@ roteiro.json:
               "caixa": {"k","q","w"} | {"k","itens":[{"txt","em"}]} | {"tipo":"cta","a","b"},
               "fonte": "<html>", "destaque": ["palavra", ...] } ] }
 """
-import json, re, sys, unicodedata
+import difflib, json, re, sys, unicodedata
 from pathlib import Path
 
 E = Path(sys.argv[1]).resolve()
@@ -88,14 +88,32 @@ for i, f in enumerate(R["falas"]):
         cena["caixas"].append({**c, "ini": t0(fid, c), "fim": b + (1.2 if fid == ORDEM[-1] else .1)})
     if f.get("fonte"):
         cena["fontes"].append({"html": f["fonte"], "ini": a, "fim": b + .1})
-    # legenda: blocos de até 3 palavras; números e palavras de destaque em amarelo
+    # legenda: blocos de até 3 palavras e até 18 letras (cabe numa linha); números e destaques em amarelo
     dest = {n(x) for x in f.get("destaque", [])}
-    pal = T[fid]["palavras"]
-    for j in range(0, len(pal), 3):
-        bloco = pal[j:j + 3]
+    pal = []
+    grafia = {}  # grafia do roteiro (o Whisper erra nome próprio: "Ambima" por "Anbima")
+    for tok in f["fala"].split():
+        grafia.setdefault(tok.strip(".,;:!?\"'()").lower(), tok.strip("\"'()"))
+    for p in T[fid]["palavras"]:  # o Whisper separa "segunda" de "-feira": cola de volta
+        w = p["w"]; nu = w.strip(".,;:!?").lower()
+        if len(nu) >= 4 and nu not in grafia:
+            par = difflib.get_close_matches(nu, list(grafia), n=1, cutoff=0.8)
+            if par:
+                p = {**p, "w": grafia[par[0]].rstrip(".,;:!?") + w[len(w.rstrip(".,;:!?")):]}
+        if pal and p["w"].startswith("-"):
+            pal[-1] = {**pal[-1], "w": pal[-1]["w"] + p["w"]}
+        else:
+            pal.append(p)
+    blocos, cur = [], []
+    for p in pal:
+        if cur and (len(cur) == 3 or len(" ".join(x["w"] for x in cur + [p])) > 18):
+            blocos.append(cur); cur = []
+        cur.append(p)
+    if cur: blocos.append(cur)
+    for k, bloco in enumerate(blocos):
         ws = [{"w": p["w"], "t": p["t"], **({"cor": "#ffd23f"} if (any(ch.isdigit() for ch in p["w"]) or n(p["w"]) in dest) else {})}
               for p in bloco]
-        fimb = pal[j + 3]["t"] if j + 3 < len(pal) else b
+        fimb = blocos[k + 1][0]["t"] if k + 1 < len(blocos) else b
         cena["legenda"].append({"ini": bloco[0]["t"], "fim": fimb, "palavras": ws})
 
 (E / "cena.js").write_text("window.CENA=" + json.dumps(cena, ensure_ascii=False) + ";")
