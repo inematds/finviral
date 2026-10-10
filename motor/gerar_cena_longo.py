@@ -107,8 +107,14 @@ for k, (cid, fs) in enumerate(grupos):
             r = resolve(f["id"], s, ini)
             if "at" not in r:
                 r["at"] = round(T[f["id"]]["ini"] - ini, 3)
+            if r["type"] == "statement" and r.get("strike_at") is not None and "~~" not in r.get("text", ""):
+                r["text"] = f"~~{r['text']}~~"  # pediu riscado sem marcar: risca a frase toda (nunca deixa a frase errada de pé)
+            if r["type"] == "statement" and r.get("strike_at") is not None:
+                r["strike_at"] = min(r["strike_at"], r["at"] + 1.2)  # frase errada não fica mais de ~1 s sem o risco
             shots.append(r)
-    cena["cenas"].append({"lang": "pt", "n": k + 1, "total": len(grupos), "chapter": cap.get("kicker", ""), "title": cap.get("titulo", ""),
+    capa = bool(shots and shots[0].get("capa"))  # o v2 sempre desenha o cabeçalho: na cena da capa ele vai vazio
+    cena["cenas"].append({"lang": "pt", "n": k + 1, "total": len(grupos), "chapter": "" if capa else cap.get("kicker", ""),
+                          "title": "" if capa else cap.get("titulo", ""),
                           "takeaway": cap.get("takeaway") or None, "dur": round(fim - ini, 3), "ini": ini, "shots": shots,
                           "reel": False, "header": True})
     if cap.get("nome") and k:  # troca de assunto = tela limpa com o nome grande

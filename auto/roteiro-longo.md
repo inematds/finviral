@@ -73,6 +73,8 @@ Um script confere cada trecho; se algum não estiver no transcript, o vídeo é 
 - O visual muda a cada ≤ 10 s (≈ a cada 25 palavras): nunca 3 falas seguidas sem shot novo.
 - Área útil à esquerda; textos curtos e grandes: `bullets` ≤ 4 itens de ≤ 40 caracteres; `compare` ≤ 3 linhas por
   lado; `timeline` ≤ 5 eventos; `label` de `media` ≤ 40 caracteres.
+- `statement` com `strike_at`: marque com `~~…~~` a parte ERRADA ("O Brasil ~~mudou da noite para o dia~~"); sem a marca
+  a frase errada fica de pé na tela.
 - Na TELA os números podem ir em algarismo ("206.900", "+7,7%"); na FALA, sempre por extenso.
 - Miniatura do vídeo citado: `{"type":"media","src":"img/<id>.jpg","calm":true,"zoom":[1,1.15],"label":"Canal · dd/mm"}`.
 - Finanças: `ficha {foto, rk, nome, canal}`, `numero {k, ate, de?, dec?, pre?, unid?, cor?, seta?("▲"|"▼"), l?}`,
