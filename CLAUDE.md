@@ -6,6 +6,8 @@ Conta/autor: `inematds <inematds@gmail.com>`, repo `inematds/finviral`. Fluxo e 
 - Influenciadores em `canais.json`; o Nei inclui/exclui. Eu posso SUGERIR (no bot) nome em destaque, consolidado e confiável — nunca emergente; só entra com ok dele.
 - Coleta só por yt-dlp (metadados) + inemavox (áudio e Whisper local). Roteiro por `claude -p` (assinatura). Sem API paga.
 - Avatar: HeyGen pelo ESTÚDIO (assinatura, `motor/avatar_heygen.sh`), autorizado pelo Nei para a rotina (09/10/2026). Oferta de troca de plano do HeyGen: SEMPRE recusar, nunca aceitar.
+- Canal: TODO conteúdo do finviral vai para o **INEMA TIA (lives2)** no YouTube (Nei, 10/10/2026). A entrega continua no bot v3; o Nei publica.
+- Sábado e domingo: além do curto 9:16, o LONGO 16:9 "A semana explicada" (5–7 min, um capítulo por influenciador): `auto/roteiro-longo.md` → `auto/checar.py --longo` → `motor/gerar_cena_longo.py` → `motor/compor_longo.sh` (palco `motor/longo.html` = cenas do explicavideo v2 copiadas em `motor/v2/` + peças de finanças `motor/v2/finviral-v2.js`).
 - Todo número precisa de trecho literal no base.md (`auto/checar.py`); política relatada e atribuída, sem tomar lado; "não é recomendação de investimento".
 
 ## Self-learning

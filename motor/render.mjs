@@ -1,4 +1,4 @@
-// node render.mjs <pasta-com-cena.js> <saida.mp4|--quadros t1,t2,...> [--fps 30] [--dur N]
+// node render.mjs <pasta-com-cena.js> <saida.mp4|--quadros t1,t2,...> [--fps 30] [--dur N] [--palco longo]
 // Mesmo método do eventosextremospub: página 1080x1920, quadro a quadro, render(t) → screenshot → ffmpeg.
 import { chromium } from 'playwright';
 import { spawn } from 'node:child_process';
@@ -11,13 +11,17 @@ const [, , pasta, saida, ...resto] = process.argv;
 const opt = k => { const i = resto.indexOf(k); return i >= 0 ? resto[i + 1] : null; };
 const fps = Number(opt('--fps') || 30);
 
-const html = fs.readFileSync(path.join(aqui, 'palco.html'), 'utf8')
-  .replace('src="cena.js"', `src="file://${path.resolve(pasta, 'cena.js')}"`);
-const tmp = path.resolve(pasta, '.palco.html');
+// --palco longo → motor/longo.html (16:9, cenas do explicavideo v2) lendo <pasta>/cena-longo.js
+const LONGO = opt('--palco') === 'longo';
+const [W, H] = LONGO ? [1920, 1080] : [1080, 1920];
+const html = fs.readFileSync(path.join(aqui, LONGO ? 'longo.html' : 'palco.html'), 'utf8')
+  .replace('<head>', `<head><base href="file://${aqui}/">`)
+  .replace('src="cena.js"', `src="file://${path.resolve(pasta, LONGO ? 'cena-longo.js' : 'cena.js')}"`);
+const tmp = path.resolve(pasta, LONGO ? '.longo.html' : '.palco.html');
 fs.writeFileSync(tmp, html);
 
 const browser = await chromium.launch({ args: ['--allow-file-access-from-files'] });
-const page = await browser.newPage({ viewport: { width: 1080, height: 1920 } });
+const page = await browser.newPage({ viewport: { width: W, height: H } });
 page.on('pageerror', e => console.error('pageerror', e.message));
 await page.goto('file://' + tmp);
 await page.waitForFunction(() => window.pronto && window.render, null, { timeout: 60000 });
