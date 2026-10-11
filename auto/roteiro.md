@@ -39,20 +39,21 @@ Mesmo formato da edição de referência:
   - os rostos (miniaturas `img/<id>.jpg` dos vídeos citados).
 
 Regras das `falas`:
-- **Abertura (f1):** a frase-choque com o número mais forte. Nunca abrir com "Neste vídeo", "Imagine" ou "Olá".
+- **Abertura (f1):** a frase-choque com o número mais forte. O número já está no `hero`: f1 NÃO leva `numero`, `ficha`, `caixa` nem `carimbo`. Nunca abrir com "Neste vídeo", "Imagine" ou "Olá".
 - **Uma ideia por fala.** Cada influenciador citado ganha `ficha` (nome, canal com "dd/mm · N mil views", `rk` do canais.json, foto `img/<id>.jpg`) e `fundo` `img/<id>.jpg`.
 - **Números:**
   - Usar `numero` (contador grande), `grafico` (só se houver série real dita no vídeo), `caixa` com citação literal ou itens, e `carimbo` ("POLÊMICA", "APOSTA", "ALERTA") quando couber.
   - Todo número mostrado está no base.md.
 - **`fonte`:** "<b>Fonte:</b> Canal, YouTube, dd/mm/aaaa · “título curto”".
 - **Texto falado (`fala`), no tom do Nei:**
-  - Tratar por "tu", frases curtas.
+  - Tratar por "você" (você, seu, sua, para você), NUNCA "tu", "teu", "tua", "ti" ou "te prepara" — a edição de referência ainda usa "tu": não copie isso. Frases curtas.
   - Escrever TODOS os números e anos por extenso, sem algarismo: "sete vírgula sete por cento", "dois mil e vinte e oito".
   - Siglas lidas como se fala ("xis pê"). Sem emoji.
 - **`em` (âncora):** uma palavra comum que está na fala, nunca um número.
-- **Penúltima fala:** gancho de comentário. É uma pergunta sobre o tema ("E tu? ... Comenta aqui"), com `"limpa": true`. A `fonte` dela é "<b>Não é recomendação de investimento.</b> Resumo do que os influenciadores disseram, com a fonte de cada número".
+- **Penúltima fala:** gancho de comentário. É uma pergunta sobre o tema ("E você? ... Comenta aqui o seu palpite"; caixa "Seu palpite pra semana"), com `"limpa": true`. A `fonte` dela é "<b>Não é recomendação de investimento.</b> Resumo do que os influenciadores disseram, com a fonte de cada número".
 - **Última fala:** CTA com `fundo` "img/cta.jpg" e `"limpa": true`.
-  - Fala: uma ponte curta do tema para a IA, mais "Te prepara pra gestão de agentes de IA: curso gratuito no inema ponto club."
+  - Fala: uma ponte curta do tema para a IA, mais "Se prepare para a gestão de agentes de IA: curso gratuito no inema ponto club."
+  - O CTA é SEMPRE só o inema.club: não citar canal do YouTube, INEMA TIA, "vídeo longo", "se inscreva" nem outro destino.
   - `hero` igual ao da referência (GESTÃO DE / AGENTES DE IA / img/cta.jpg).
   - `caixa` tipo cta com "INEMA.CLUB".
 - **Eleição e política:** relatar o que cada um disse, sempre atribuído ("segundo ele", "ele aposta"), sem tomar lado e sem opinião do Nei sobre candidato.

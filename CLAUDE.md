@@ -16,6 +16,8 @@ When I correct you, or you catch yourself making a mistake: before continuing, a
 
 ## Lessons
 
+- Tratar por "você" (nunca "tu/teu/ti/te prepara") e CTA SEMPRE só o inema.club — nada de "segue o canal", vídeo longo ou canal do YouTube; o portão (checar.py / rodar.sh) reprova. (Nei, 11/10/2026)
+- Motor do curto: f1 com hero não leva numero/ficha/caixa (ficava número sobre número); o numero entra no início da fala e fica até o próximo visual (senão a parte de cima fica vazia); legenda cola número partido pelo Whisper ("7 ,7 %" → "7,7%"). (11/10/2026)
 - Cadeia longa (HeyGen + render + publicação) disparada à mão vai por `systemd-run --user --unit …` (sobrevive ao terminal; linger ligado), nunca como background da sessão: em 10/10 o piloto rodava preso à sessão e o Nei quis sair. O `avatar_heygen.sh` retoma sem reenviar (reaproveita `video_id-bN.txt`). (10/10/2026)
 
 - Legenda palavra a palavra: bloco por TAMANHO (≤18 letras), não por contagem de palavras, e conferir o maior bloco num frame antes de entregar; palavra da legenda vem do roteiro, o Whisper erra nome próprio ("Ambima"). (10/10/2026)

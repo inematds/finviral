@@ -72,7 +72,7 @@ Se aparecer em destaque outro nome consolidado e confiável, o sistema sugere a 
 - Quadro 0 cheio: data dd/mm/aaaa e o número mais forte.
 - Só entra número que está na transcrição, com a fonte (canal, data, título) na tela. Não é recomendação de investimento.
 - Eleição e política: o vídeo relata o que cada um disse, sempre atribuído, sem tomar lado.
-- Fala no tom do Nei ("tu"), com números e anos por extenso.
+- Fala no tom do Nei, tratando por "você", com números e anos por extenso.
 - Fim: gancho de comentário e CTA de gestão de agentes de IA no inema.club.
 - HeyGen só pelo estúdio da assinatura. A oferta de troca de plano é sempre recusada.
 

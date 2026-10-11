@@ -42,8 +42,8 @@ Um script confere cada trecho; se algum não estiver no transcript, o vídeo é 
   {"text":"A SEMANA EXPLICADA","size":96},{"text":"<NÚMERO MAIS FORTE>","size":150,"cor":"#3ef0a0"},
   {"text":"<linha âmbar curta>","size":92,"cor":"#ffb638"}],"sub":"<promessa>","fotos":["img/<id>.jpg", …]}`
   (fotos = miniaturas dos vídeos dos capítulos, até 5; SEM `src`).
-- A 1ª frase diz o GANHO de quem assiste ("Em seis minutos tu entende o que os maiores influenciadores de finanças
-  disseram nesta semana e o que isso muda pra ti"). Nunca abrir com "Olá", "Neste vídeo" ou "Imagine".
+- A 1ª frase diz o GANHO de quem assiste ("Em seis minutos você entende o que os maiores influenciadores de finanças
+  disseram nesta semana e o que isso muda para você"). Nunca abrir com "Olá", "Neste vídeo" ou "Imagine".
 - Depois, a prévia: um `bullets` (row) com os capítulos e um "no fim: …" que prende até o final.
 
 **Cada capítulo de influenciador (5 a 10 falas, 120 a 200 palavras):**
@@ -59,10 +59,10 @@ Um script confere cada trecho; se algum não estiver no transcript, o vídeo é 
 
 **Fecho (cz, 3 a 5 falas):**
 - Resumo em `bullets` (um item por capítulo).
-- Gancho de comentário: pergunta sobre o tema ("E tu? … Comenta aqui."), com `fonte` "<b>Não é recomendação de
+- Gancho de comentário: pergunta sobre o tema ("E você? … Comenta aqui."), com `fonte` "<b>Não é recomendação de
   investimento.</b> Resumo do que os influenciadores disseram, com a fonte de cada número".
-- Última fala: CTA — ponte curta do tema para a IA + "Te prepara pra gestão de agentes de IA: curso gratuito no inema
-  ponto club." Shots: `{"type":"media","src":"img/cta.jpg","calm":true,"label":"**inema.club** · gestão de agentes de IA"}`
+- Última fala: CTA — ponte curta do tema para a IA + "Se prepare para a gestão de agentes de IA: curso gratuito no inema
+  ponto club." O CTA é SEMPRE só o inema.club: não citar canal do YouTube, INEMA TIA, "inscreva-se" nem outro destino. Shots: `{"type":"media","src":"img/cta.jpg","calm":true,"label":"**inema.club** · gestão de agentes de IA"}`
   e `keyword` "inema.club".
 
 **Shots — regras:**
@@ -80,7 +80,7 @@ Um script confere cada trecho; se algum não estiver no transcript, o vídeo é 
 - Finanças: `ficha {foto, rk, nome, canal}`, `numero {k, ate, de?, dec?, pre?, unid?, cor?, seta?("▲"|"▼"), l?}`,
   `citacao {q, w, k?}`, `grafico {serie[], cor?, rotulo}`, `carimbo {txt, cor?}` (com `"keep": true`).
 
-**Texto falado:** tom do Nei, "tu", frases curtas; TODOS os números e anos por extenso ("duzentos e seis mil e
+**Texto falado:** tom do Nei, tratando por "você" (nunca "tu", "teu", "ti", "te prepara"), frases curtas; TODOS os números e anos por extenso ("duzentos e seis mil e
 novecentos pontos", "dois mil e vinte e oito"); siglas comuns em maiúsculas (PIB, IBGE, FMI, CDI);
 sem emoji. **Eleição e política:** só o que cada um disse, sempre atribuído, sem lado e sem opinião do Nei.
 **Ética:** nada de promessa de ganho nem recomendação.

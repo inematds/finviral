@@ -107,6 +107,14 @@ for f in F:
     for img in re.findall(r"img/[\w.-]+", json.dumps(f)):
         if not (E / img).exists():
             erros.append(f"{fid}: imagem ausente {img}")
+    if re.search(r"\b(tu|teu|tua|teus|tuas|ti|contigo|te prepara)\b", fala, re.I):
+        erros.append(f"{fid}: trata por 'tu' (usar 'você'): {fala[:80]}")
+    if re.search(r"inema tia|v[ií]deo longo|inscrev|canal do youtube", fala, re.I):
+        erros.append(f"{fid}: CTA é só o inema.club (sem canal do YouTube nem vídeo longo): {fala[:80]}")
+if re.search(r"\bTeu\b|\bTua\b", json.dumps(R, ensure_ascii=False)):
+    erros.append("texto na tela com 'teu/tua' (usar 'seu/sua')")
+if not LONGO and F and R.get("hero") and any(F[0].get(k) for k in ("numero", "ficha", "caixa", "carimbo")):
+    erros.append("f1 com numero/ficha/caixa/carimbo por cima do hero (o número já está no hero)")
 if F and "inema" not in F[-1].get("fala", "").lower():
     erros.append("última fala sem CTA do inema")
 if "recomendação de investimento" not in json.dumps(R, ensure_ascii=False):
