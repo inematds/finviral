@@ -149,7 +149,7 @@ for f in FALAS:
     if cur:
         blocos.append(cur)
     for k, bl in enumerate(blocos):
-        ws = [{"w": p["w"], "t": p["t"], **({"cor": "#ffb638"} if (any(ch.isdigit() for ch in p["w"]) or n(p["w"]) in dest) else {})} for p in bl]
+        ws = [{"w": p["w"], "t": p["t"], **({"cor": "#FACC15"} if (any(ch.isdigit() for ch in p["w"]) or n(p["w"]) in dest) else {})} for p in bl]
         cena["legenda"].append({"ini": bl[0]["t"], "fim": blocos[k + 1][0]["t"] if k + 1 < len(blocos) else b, "palavras": ws})
 
 (E / "cena-longo.js").write_text("window.CENA=" + json.dumps(cena, ensure_ascii=False) + ";")

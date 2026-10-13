@@ -185,7 +185,7 @@ for i, f in enumerate(R["falas"]):
         cur.append(p)
     if cur: blocos.append(cur)
     for k, bloco in enumerate(blocos):
-        ws = [{"w": p["w"], "t": p["t"], **({"cor": "#ffd23f"} if (any(ch.isdigit() for ch in p["w"]) or n(p["w"]) in dest) else {})}
+        ws = [{"w": p["w"], "t": p["t"], **({"cor": "#FACC15"} if (any(ch.isdigit() for ch in p["w"]) or n(p["w"]) in dest) else {})}
               for p in bloco]
         fimb = blocos[k + 1][0]["t"] if k + 1 < len(blocos) else b
         cena["legenda"].append({"ini": bloco[0]["t"], "fim": fimb, "palavras": ws})
