@@ -1,11 +1,17 @@
 {
   "_como_editar": "Para incluir ou tirar alguém, edite esta lista (ou peça ao Claude). 'ativo': false pausa sem apagar. Quem entra por sugestão do sistema precisa ser nome consolidado e confiável (ranking Anbima ou equivalente, anos de canal), nunca emergente; a sugestão vem no bot e só entra com o ok do Nei.",
-  "_ranking": "Anbima FInfluence, 10ª edição (2º semestre de 2025)",
+  "_ranking": "Anbima FInfluence, 10ª edição (2º semestre de 2025), ranking geral de pessoas físicas, Top 10 (relatório p. 41). Lista ampliada de 5 para 10 a pedido do Nei em 13/10/2026.",
   "canais": [
     {"handle": "@BrunoPerini", "nome": "Bruno Perini", "rk": "Nº 1 · ANBIMA", "ativo": true},
     {"handle": "@EconomistaSincero", "nome": "Economista Sincero", "rk": "Nº 2 · ANBIMA", "ativo": true},
     {"handle": "@ricamorim", "nome": "Ricardo Amorim", "rk": "Nº 3 · ANBIMA", "ativo": true},
-    {"handle": "@primorico", "nome": "O Primo Rico", "rk": "TOP 10 · ANBIMA", "ativo": true},
-    {"handle": "@oseconomistas", "nome": "Os Economistas", "rk": "TOP 10 · ANBIMA", "ativo": true}
+    {"handle": "@primorico", "nome": "O Primo Rico", "rk": "Nº 4 · ANBIMA", "ativo": true},
+    {"handle": "@HermannGreb", "nome": "Hermann Greb", "rk": "Nº 5 · ANBIMA", "ativo": true},
+    {"handle": "@podcastcafecomferri", "nome": "Café com Ferri", "rk": "Nº 6 · ANBIMA", "ativo": true},
+    {"handle": "@pablospyer8689", "nome": "Pablo Spyer", "rk": "Nº 7 · ANBIMA", "ativo": true},
+    {"handle": "@primopobre", "nome": "Primo Pobre", "rk": "Nº 8 · ANBIMA", "ativo": true},
+    {"handle": "@MePoupe", "nome": "Nathalia Arcuri (Me Poupe!)", "rk": "Nº 9 · ANBIMA", "ativo": true},
+    {"handle": "@TiagoReisYT", "nome": "Tiago Reis", "rk": "Nº 10 · ANBIMA", "ativo": true},
+    {"handle": "@oseconomistas", "nome": "Os Economistas", "rk": "TOP 10 · ANBIMA", "ativo": false, "_nota": "fora do Top 10 da 10ª edição; pausado em 13/10/2026 quando a lista passou a ser o Top 10 atual"}
   ]
 }

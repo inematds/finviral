@@ -63,7 +63,7 @@ motor/avatar_heygen.sh $E FINVIRAL-<titulo> && python3 motor/gerar_cena.py $E --
 
 ## Influencers
 
-The list lives in `canais.json`, with `"ativo": false` to pause someone. Today they are the top 5 of the Anbima FInfluence ranking (10th edition): Bruno Perini, Economista Sincero, Ricardo Amorim, O Primo Rico and Os Economistas.
+The list lives in `canais.json`, with `"ativo": false` to pause someone. Today it is the top 10 of the Anbima FInfluence ranking (10th edition): Bruno Perini, Economista Sincero, Ricardo Amorim, O Primo Rico, Hermann Greb, Café com Ferri, Pablo Spyer, Primo Pobre, Nathalia Arcuri (Me Poupe!) and Tiago Reis.
 
 If another established, trustworthy name shows up in the spotlight, the system suggests adding it in the bot message. Emerging names never get in, and a name is only added with Nei's ok.
 

@@ -63,7 +63,7 @@ motor/avatar_heygen.sh $E FINVIRAL-<titulo> && python3 motor/gerar_cena.py $E --
 
 ## Influencers
 
-La lista está en `canais.json`, con `"ativo": false` para pausar. Hoy son los 5 primeros del ranking Anbima FInfluence (10.ª edición): Bruno Perini, Economista Sincero, Ricardo Amorim, O Primo Rico y Os Economistas.
+La lista está en `canais.json`, con `"ativo": false` para pausar. Hoy es el Top 10 del ranking Anbima FInfluence (10.ª edición): Bruno Perini, Economista Sincero, Ricardo Amorim, O Primo Rico, Hermann Greb, Café com Ferri, Pablo Spyer, Primo Pobre, Nathalia Arcuri (Me Poupe!) y Tiago Reis.
 
 Si aparece en destaque otro nombre consolidado y confiable, el sistema sugiere incluirlo en el mensaje del bot. Un nombre emergente nunca entra, y la inclusión solo ocurre con el ok de Nei.
 
