@@ -16,6 +16,9 @@ When I correct you, or you catch yourself making a mistake: before continuing, a
 
 ## Lessons
 
+- Curto = RESUMO DOS DEZ com pelo menos 5 assuntos (um por influenciador sempre que der), 2–3 min, 14–20 falas, até 420 palavras; cada assunto continua inteiro (contexto, o que ele disse, o que muda pra quem assiste) e termo técnico explicado na fala. Substitui o "no máximo 3 assuntos" de 10/10: o Nei pediu em 13/10/2026; o portão conta os vídeos distintos do base.md (MIN_ASSUNTOS).
+- Quadro 0: o rosto do Nei ocupa toda a parte de baixo (1080x720 em y=1200, sem moldura) até o fim da 1ª fala; depois o quadro padrão (palco.html + compor_avatar.sh). (13/10/2026)
+- gov.br na fala = "gov bê érre", sem "ponto" ("consumidor gov bê érre"); o checar.py reprova "ponto gov". O avatar leu "consumidor ponto gov ponto bê erre" no advviral de 13/10 e o Nei reprovou. (13/10/2026)
 - Tratar por "você" (nunca "tu/teu/ti/te prepara") e CTA SEMPRE só o inema.club — nada de "segue o canal", vídeo longo ou canal do YouTube; o portão (checar.py / rodar.sh) reprova. (Nei, 11/10/2026)
 - Motor do curto: f1 com hero não leva numero/ficha/caixa (ficava número sobre número); o numero entra no início da fala e fica até o próximo visual (senão a parte de cima fica vazia); legenda cola número partido pelo Whisper ("7 ,7 %" → "7,7%"). (11/10/2026)
 - Cadeia longa (HeyGen + render + publicação) disparada à mão vai por `systemd-run --user --unit …` (sobrevive ao terminal; linger ligado), nunca como background da sessão: em 10/10 o piloto rodava preso à sessão e o Nei quis sair. O `avatar_heygen.sh` retoma sem reenviar (reaproveita `video_id-bN.txt`). (10/10/2026)

@@ -36,10 +36,11 @@ Mesmo formato da edição de referência:
   - o número mais forte, em `t2`;
   - uma linha `t3`;
   - um `t4` curto;
-  - os rostos (miniaturas `img/<id>.jpg` dos vídeos citados).
+  - os rostos (miniaturas `img/<id>.jpg` dos vídeos citados, no máximo cinco).
 
 Regras das `falas`:
 - **Abertura (f1):** a frase-choque com o número mais forte. O número já está no `hero`: f1 NÃO leva `numero`, `ficha`, `caixa` nem `carimbo`. Nunca abrir com "Neste vídeo", "Imagine" ou "Olá".
+- **Resumo dos dez, com pelo menos CINCO assuntos (Nei, 13/10/2026; vale para todo modo do curto).** O vídeo é o resumo do que os dez influenciadores do `canais.json` publicaram no período: no mínimo cinco assuntos (o mínimo exato vem no Modo), de influenciadores diferentes sempre que der, o mais forte primeiro. Logo depois de f1, uma fala-sumário com `caixa` de `itens` (k "Hoje no radar", ou "Na semana") listando os assuntos que vêm, um item curto por assunto, cada item com `em` numa palavra da fala. Cada assunto tem pelo menos uma linha no base.md com o id do vídeo dele: a conferência conta os vídeos distintos do base.md. Cada assunto continua contado inteiro, em duas ou três falas seguidas (contexto, o que ele disse, o que muda pra quem assiste): cinco assuntos não podem virar cinco fragmentos.
 - **Uma ideia por fala.** Cada influenciador citado ganha `ficha` (nome, canal com "dd/mm · N mil views", `rk` do canais.json, foto `img/<id>.jpg`) e `fundo` `img/<id>.jpg`.
 - **Números:**
   - Usar `numero` (contador grande), `grafico` (só se houver série real dita no vídeo), `caixa` com citação literal ou itens, e `carimbo` ("POLÊMICA", "APOSTA", "ALERTA") quando couber.
@@ -48,7 +49,7 @@ Regras das `falas`:
 - **Texto falado (`fala`), no tom do Nei:**
   - Tratar por "você" (você, seu, sua, para você), NUNCA "tu", "teu", "tua", "ti" ou "te prepara" — a edição de referência ainda usa "tu": não copie isso. Frases curtas.
   - Escrever TODOS os números e anos por extenso, sem algarismo: "sete vírgula sete por cento", "dois mil e vinte e oito".
-  - Siglas lidas como se fala ("xis pê"). Sem emoji.
+  - Siglas lidas como se fala ("xis pê"). Endereço do governo se fala sem "ponto": "consumidor gov bê érre", "gov bê érre" (nunca "consumidor ponto gov ponto bê erre"; o Nei reprovou em 13/10/2026). Na tela (`caixa`, `fonte`) continua "consumidor.gov.br". O CTA "inema ponto club" não muda. Sem emoji.
 - **`em` (âncora):** uma palavra comum que está na fala, nunca um número.
 - **Penúltima fala:** gancho de comentário. É uma pergunta sobre o tema ("E você? ... Comenta aqui o seu palpite"; caixa "Seu palpite pra semana"), com `"limpa": true`. A `fonte` dela é "<b>Não é recomendação de investimento.</b> Resumo do que os influenciadores disseram, com a fonte de cada número".
 - **Última fala:** CTA com `fundo` "img/cta.jpg" e `"limpa": true`.
