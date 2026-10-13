@@ -52,7 +52,7 @@ Regras das `falas`:
 - **`em` (âncora):** uma palavra comum que está na fala, nunca um número.
 - **Penúltima fala:** gancho de comentário. É uma pergunta sobre o tema ("E você? ... Comenta aqui o seu palpite"; caixa "Seu palpite pra semana"), com `"limpa": true`. A `fonte` dela é "<b>Não é recomendação de investimento.</b> Resumo do que os influenciadores disseram, com a fonte de cada número".
 - **Última fala:** CTA com `fundo` "img/cta.jpg" e `"limpa": true`.
-  - Fala: uma ponte curta do tema para a IA, mais "Se prepare para a gestão de agentes de IA: curso gratuito no inema ponto club."
+  - Fala: uma ponte curta do tema para a IA, mais "Se prepare para a gestão de agentes de IA com o curso gratuito do inema ponto club."
   - O CTA é SEMPRE só o inema.club: não citar canal do YouTube, INEMA TIA, "vídeo longo", "se inscreva" nem outro destino.
   - `hero` igual ao da referência (GESTÃO DE / AGENTES DE IA / img/cta.jpg).
   - `caixa` tipo cta com "INEMA.CLUB".
