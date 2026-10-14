@@ -17,6 +17,7 @@ When I correct you, or you catch yourself making a mistake: before continuing, a
 ## Lessons
 
 - Curto = RESUMO DOS DEZ com pelo menos 5 assuntos (um por influenciador sempre que der), 2–3 min, 14–20 falas, até 420 palavras; cada assunto continua inteiro (contexto, o que ele disse, o que muda pra quem assiste) e termo técnico explicado na fala. Substitui o "no máximo 3 assuntos" de 10/10: o Nei pediu em 13/10/2026; o portão conta os vídeos distintos do base.md (MIN_ASSUNTOS).
+- Viradas (Nei, 14/10/2026): 1 s de cartão "ASSUNTO n DE N" antes de cada assunto e antes da pergunta, com a voz parada (gerar_cena.py abre o buraco e grava respiros.json; motor/respiros.py faz o mesmo no áudio/avatar). Fala sem ficha nem número leva manchete no topo; sem caixa, o lado do avatar mostra o índice do radar.
 - Quadro 0: o rosto do Nei ocupa toda a parte de baixo (1080x720 em y=1200, sem moldura) até o fim da 1ª fala; depois o quadro padrão (palco.html + compor_avatar.sh). (13/10/2026)
 - gov.br na fala = "gov bê érre", sem "ponto" ("consumidor gov bê érre"); o checar.py reprova "ponto gov". O avatar leu "consumidor ponto gov ponto bê erre" no advviral de 13/10 e o Nei reprovou. (13/10/2026)
 - Tratar por "você" (nunca "tu/teu/ti/te prepara") e CTA SEMPRE só o inema.club — nada de "segue o canal", vídeo longo ou canal do YouTube; o portão (checar.py / rodar.sh) reprova. (Nei, 11/10/2026)
