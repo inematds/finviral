@@ -14,7 +14,7 @@ roteiro.json:
               "caixa": {"k","q","w"} | {"k","itens":[{"txt","em"}]} | {"tipo":"cta","a","b"},
               "fonte": "<html>", "destaque": ["palavra", ...] } ] }
 """
-import difflib, json, re, sys, unicodedata
+import difflib, json, re, subprocess, sys, unicodedata
 from pathlib import Path
 
 E = Path(sys.argv[1]).resolve()
@@ -30,9 +30,34 @@ VIRA = 1.7  # folha virando: 0,6 s a tela sai, 0,5 s o cartão, 0,6 s o cartão 
 ASS = [i for i, f in enumerate(R["falas"]) if f.get("assunto")]
 PERG = len(ORDEM) - 2 if len(ORDEM) >= 4 else None
 RESP = []  # corte na linha ORIGINAL do áudio
+# o corte cai no SILÊNCIO real entre as duas falas (Nei, 14/10/2026: no corte pelo tempo da transcrição sobrou
+# sílaba do "resto" depois da virada, e no Primo Rico o tempo chutado partiu a frase ao meio); sem silêncio perto,
+# ou com fala de tempo chutado ao lado, essa virada não entra (melhor sem virada que com a voz partida)
+AUDIO = E / ("avatar/avatar.wav" if AVATAR else "narracao.wav")
+SIL = []
+if AUDIO.exists():
+    log = subprocess.run(["ffmpeg", "-v", "info", "-i", str(AUDIO), "-af", "silencedetect=n=-35dB:d=0.12", "-f", "null", "-"],
+                         capture_output=True, text=True).stderr
+    ini_s = [float(x) for x in re.findall(r"silence_start: ([\d.]+)", log)]
+    fim_s = [float(x) for x in re.findall(r"silence_end: ([\d.]+)", log)]
+    SIL = list(zip(ini_s, fim_s))
 for i in sorted({i for i in ASS if i} | ({PERG} if PERG else set())):
-    a0, a1 = T[ORDEM[i - 1]]["fim"], T[ORDEM[i]]["ini"]
-    RESP.append({"t": round((a0 + a1) / 2 if a1 > a0 else a1, 3), "dur": VIRA, "i": i})
+    ant, prox = T[ORDEM[i - 1]], T[ORDEM[i]]
+    a0, a1 = ant["fim"], prox["ini"]
+    corte = round((a0 + a1) / 2 if a1 > a0 else a1, 3)
+    if SIL:
+        if ant.get("interpolada") or prox.get("interpolada"):
+            print(f"aviso: virada antes de {ORDEM[i]} pulada (tempo de fala chutado ao lado)"); continue
+        w0 = ant["palavras"][-1]["f"] if ant["palavras"] else a0
+        w1 = prox["palavras"][0]["t"] if prox["palavras"] else a1
+        alvo = (w0 + w1) / 2
+        perto = [(x0, x1) for x0, x1 in SIL if x1 >= min(w0, w1) - 0.6 and x0 <= max(w0, w1) + 0.6]
+        if not perto:
+            print(f"aviso: virada antes de {ORDEM[i]} pulada (sem silêncio perto de {alvo:.2f} s)"); continue
+        s0, s1 = min(perto, key=lambda x: abs((x[0] + x[1]) / 2 - alvo))
+        corte = round((s0 + s1) / 2, 3)
+        ant["fim"], prox["ini"] = corte, corte  # a fala seguinte começa no corte: entra depois do buraco
+    RESP.append({"t": corte, "dur": VIRA, "i": i})
 desloca = lambda x: round(x + sum(r["dur"] for r in RESP if x >= r["t"]), 3)
 desloca_fim = lambda x: round(x + sum(r["dur"] for r in RESP if x > r["t"]), 3)  # fim colado no corte fica antes do buraco
 for t_ in T.values():
@@ -69,7 +94,9 @@ DUR = round(fim(ORDEM[-1]) + 1.2, 2)
 cena = {"duracao": DUR, "marca": R["marca"], "selo": R["selo"], "fundos": [], "hero": [], "fichas": [], "numeros": [],
         "graficos": [], "carimbos": [], "caixas": [], "fontes": [], "legenda": []}
 if R.get("avatar"):
-    cena["avatar"] = {**R["avatar"], "img": str(E / R["avatar"]["img"]), "ini": -1, "fim": DUR + 1}
+    # com o HeyGen, a foto de prévia não entra: aparecia ampliada nos instantes em que o vídeo ainda não cobre a caixa
+    # (meio rosto na pergunta da cidade, Nei 14/10/2026); a foto fica só na versão sem avatar
+    cena["avatar"] = {**R["avatar"], "img": "" if AVATAR else str(E / R["avatar"]["img"]), "ini": -1, "fim": DUR + 1}
 NUMW = {"zero", "um", "uma", "dois", "duas", "tres", "quatro", "cinco", "seis", "sete", "oito", "nove", "dez", "onze", "doze", "treze",
         "quatorze", "catorze", "quinze", "dezesseis", "dezessete", "dezoito", "dezenove", "vinte", "trinta", "quarenta", "cinquenta",
         "sessenta", "setenta", "oitenta", "noventa", "cem", "cento", "duzentos", "duzentas", "trezentos", "trezentas", "quatrocentos",

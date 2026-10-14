@@ -69,7 +69,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#05080c;font-fam
 #club{position:absolute;left:40px;right:40px;top:1290px;opacity:0}
 /* avatar (piloto: imagem) */
 #avbox{position:absolute;left:636px;top:1286px;width:408px;height:461px;background:#FACC15;opacity:0}
-#avbox div{position:absolute;left:4px;top:4px;width:400px;height:453px;background-size:cover;background-position:center 20%}
+#avbox div{position:absolute;left:4px;top:4px;width:400px;height:453px;background:#0b0f14;background-size:cover;background-position:center 20%}
 /* quadro 0 (capa): rosto do Nei ocupa toda a parte de baixo, sem moldura (Nei, 13/10/2026) */
 #avbox.capa{left:0;top:1200px;width:1080px;height:720px;background:none}
 #avbox.capa div{left:0;top:0;width:1080px;height:720px;background-position:center 8%}
@@ -152,7 +152,7 @@ const fmt=(v,dec)=>v.toLocaleString('pt-BR',{minimumFractionDigits:dec||0,maximu
 $('marca').textContent=C.marca; $('selo').textContent=C.selo;
 // fundos: uma div por imagem
 const FB=$('fundos'); (C.fundos||[]).forEach((f,i)=>{const d=document.createElement('div');d.className='fundo';d.id='fb'+i;d.style.setProperty('--img',`url("${f.img}")`);d.innerHTML='<div class="desf"></div><div class="nit"></div>';FB.appendChild(d);});
-if(C.avatar){ $('avbox').firstElementChild.style.backgroundImage=`url("${C.avatar.img}")`; $('avtag').innerHTML=C.avatar.tag||''; }
+if(C.avatar){ if(C.avatar.img) $('avbox').firstElementChild.style.backgroundImage=`url("${C.avatar.img}")`; $('avtag').innerHTML=C.avatar.tag||''; }
 const imgs=[...(C.fundos||[]).map(f=>f.img),C.avatar&&C.avatar.img,...(C.fichas||[]).map(f=>f.foto)].filter(Boolean);
 const preload=imgs.map(s=>{const im=new Image();im.src=s;return im.decode().catch(()=>{});});
 

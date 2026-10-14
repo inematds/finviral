@@ -1,5 +1,6 @@
 | data | o que quebrou | menor correção | prompt \| infra |
 |---|---|---|---|
+| 2026-10-14 | diário: sílaba partida na virada do Primo Pobre, virada no meio da frase do Primo Rico (Whisper pulou f10–f11 e o tempo foi chutado) e foto provisória ampliada ("meio rosto") em 1:51 | retempo.py retranscreve só o trecho pulado; gerar_cena.py corta a virada no silêncio real (sem silêncio ou com tempo chutado ao lado, pula a virada); com avatar, o palco não desenha a foto | infra |
 | 2026-10-11 | curto de domingo publicado com número sobre o hero, "tu"/CTA errada, carimbo sobre o texto e meio da tela vazio; Nei viu e mandou tirar do ar (IZGFkJ-u_S8 removido) | portão VISUAL antes do YouTube (sobreposição/vazio medidos no palco) — pendente | infra + prompt |
 | 2026-10-11 | domingo LONGO não saiu: "fala f22 não achada na transcrição do avatar" (o avatar falou, o Whisper pulou 7,6 s de áudio) | retempo.py interpola fala sem palavra na lacuna entre as vizinhas (aborta só com >3) | infra |
 | 2026-10-11 | domingo curto: número sobre o hero no início, topo vazio até a âncora, legenda "7 ,7 %", fala com "tu" e CTA para o canal INEMA TIA | gerar_cena.py (f1 limpo, número do início da fala até o próximo visual, cola número) + checar.py reprova tu/CTA fora do inema.club + prompts | prompt + infra |
