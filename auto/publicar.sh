@@ -35,3 +35,9 @@ node "$BOT" $DRY "$VB" "finviral · $ROT · ${DUR}s
 $ST
 $(head -c 600 "$E/legenda.txt")$EXTRA" || echo "falhou o envio ao bot"
 echo "$ST"
+# TikTok + Instagram @inemafuturos pelo Metricool (projeto metricool-pub2), 1 por dia, só o curto vertical
+# já publicado no YouTube. Pedido do Nei em 22/10/2026. Falha aqui não derruba a rodada (avisa no bot).
+MP="$HOME/projetos/metricool-pub2/publicar_finviral.sh"
+if [ -n "$URL" ] && [ "$W" -lt "$(ffprobe -v error -select_streams v:0 -show_entries stream=height -of csv=p=0 "$V")" ] && [ -x "$MP" ]; then
+  SEM_BOT="${SEM_BOT:-}" timeout 900 bash "$MP" "$V" "$E" "$URL" || echo "metricool: não agendou (ver ~/projetos/metricool-pub2/estado/)"
+fi
