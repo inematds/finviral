@@ -94,7 +94,7 @@ INSTR="$INSTR Mínimo de assuntos nesta edição: $MIN_ASSUNTOS ($NT vídeos tra
 if [ "$MODO" = diario ]; then
   JA=$(python3 "$RAIZ/auto/usados.py" recentes "$DIA" 7)
   [ -n "$JA" ] && INSTR="$INSTR
-Já publicados no diário nos últimos 7 dias (data · influenciador · assunto). Os vídeos deles já estão fora. O mesmo assunto PODE voltar pela boca de OUTRO influenciador, porque é outro ponto de vista: nesse caso ligue os dois na fala ("o Fulano também falou sobre isso", "no dia tal o Beltrano disse X; agora o Fulano vê diferente") e mostre o que ele traz de novo ou de diferente. O que não pode é recontar a mesma coisa do mesmo jeito.
+Já publicados no diário nos últimos 7 dias (data · influenciador · assunto). Os vídeos deles já estão fora. O mesmo assunto PODE voltar pela boca de OUTRO influenciador, porque é outro ponto de vista: nesse caso ligue os dois na fala («o Fulano também falou sobre isso», «no dia tal o Beltrano disse X; agora o Fulano vê diferente») e mostre o que ele traz de novo ou de diferente. O que não pode é recontar a mesma coisa do mesmo jeito.
 $JA"
 fi
 cp "$RAIZ/motor/assets/cta.jpg" "$RAIZ/motor/assets/avatar-teste.jpg" "$ED/img/"
