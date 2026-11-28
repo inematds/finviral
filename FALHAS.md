@@ -1,5 +1,6 @@
 | data | o que quebrou | menor correção | prompt \| infra |
 |---|---|---|---|
+| 2026-11-28 | curto perto do teto (até 415 de 420 palavras); nos nichos irmãos o estouro derrubou o vídeo do dia: 19 falas × ~23 palavras não cabem em 400, e a correção só dizia "passou" | pedido de 280 a 350 palavras e até 18 por fala; ao estourar, a correção mostra as falas mais longas e tira o último assunto (aceita 4) | prompt |
 | 2026-10-26 | aviso "já publicados nos últimos 7 dias" quebrava (`agora: command not found`): aspas retas do exemplo fechavam o texto do INSTR | aspas do exemplo trocadas por « » (1 linha no rodar.sh) | prompt |
 | 2026-10-14 | diário: sílaba partida na virada do Primo Pobre, virada no meio da frase do Primo Rico (Whisper pulou f10–f11 e o tempo foi chutado) e foto provisória ampliada ("meio rosto") em 1:51 | retempo.py retranscreve só o trecho pulado; gerar_cena.py corta a virada no silêncio real (sem silêncio ou com tempo chutado ao lado, pula a virada); com avatar, o palco não desenha a foto | infra |
 | 2026-10-11 | curto de domingo publicado com número sobre o hero, "tu"/CTA errada, carimbo sobre o texto e meio da tela vazio; Nei viu e mandou tirar do ar (IZGFkJ-u_S8 removido) | portão VISUAL antes do YouTube (sobreposição/vazio medidos no palco) — pendente | infra + prompt |
